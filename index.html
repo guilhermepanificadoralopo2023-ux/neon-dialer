@@ -1,0 +1,203 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEON DIALER</title>
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #020807;
+  color: #00ff88;
+  font-family: Consolas, monospace;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.phone {
+  width: 360px;
+  max-width: 100%;
+  padding: 25px;
+  border: 1px solid #00ff88;
+  border-radius: 22px;
+  background: #06120e;
+  box-shadow: 0 0 25px #00ff8844;
+}
+
+h1 {
+  text-align: center;
+  letter-spacing: 5px;
+  text-shadow: 0 0 12px #00ff88;
+}
+
+.subtitle {
+  text-align: center;
+  color: #48a879;
+  font-size: 11px;
+}
+
+.display {
+  margin: 25px 0;
+  padding: 18px;
+  border: 1px solid #087c48;
+  background: #020906;
+  text-align: center;
+  border-radius: 10px;
+}
+
+#number {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #00ff88;
+  font: 24px Consolas;
+  text-align: center;
+}
+
+#status {
+  font-size: 11px;
+  color: #00ff88;
+  min-height: 15px;
+  text-align: center;
+}
+
+.keys {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+button {
+  height: 65px;
+  background: #071b12;
+  color: #00ff88;
+  border: 1px solid #00ff88;
+  border-radius: 12px;
+  font: 23px Consolas;
+  cursor: pointer;
+  transition: .2s;
+}
+
+button:hover {
+  background: #00ff88;
+  color: #00150b;
+  box-shadow: 0 0 18px #00ff88;
+}
+
+button:active { transform: scale(.92); }
+
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.actions button {
+  flex: 1;
+  height: 55px;
+}
+
+.call { border-color: #00ff88; }
+.delete { border-color: #ff4444; color: #ff5555; }
+.clear { border-color: #00ccff; color: #00ccff; }
+
+.footer {
+  margin-top: 25px;
+  text-align: center;
+  color: #39795b;
+  font-size: 10px;
+}
+
+@keyframes glow {
+  50% { opacity: .4; }
+}
+
+h1 { animation: glow 2s infinite; }
+</style>
+</head>
+
+<body>
+<div class="phone">
+
+  <h1>NEON DIALER</h1>
+  <div class="subtitle">[ FUTURISTIC COMMUNICATION SYSTEM ]</div>
+
+  <div class="display">
+    <div>TELEPHONE TERMINAL</div>
+    <br>
+    <input id="number" placeholder="000000000" readonly>
+    <p id="status">SYSTEM READY...</p>
+  </div>
+
+  <div class="keys">
+    <button onclick="add('1')">1</button>
+    <button onclick="add('2')">2</button>
+    <button onclick="add('3')">3</button>
+    <button onclick="add('4')">4</button>
+    <button onclick="add('5')">5</button>
+    <button onclick="add('6')">6</button>
+    <button onclick="add('7')">7</button>
+    <button onclick="add('8')">8</button>
+    <button onclick="add('9')">9</button>
+    <button onclick="add('*')">*</button>
+    <button onclick="add('0')">0</button>
+    <button onclick="add('#')">#</button>
+  </div>
+
+  <div class="actions">
+    <button class="call" onclick="call()">CALL</button>
+    <button class="delete" onclick="removeLast()">⌫</button>
+    <button class="clear" onclick="clearNumber()">CLR</button>
+  </div>
+
+  <div class="footer">
+    NEON SYSTEM v1.0<br>
+    CONNECTION STATUS: ONLINE
+  </div>
+
+</div>
+
+<script>
+const number = document.getElementById('number');
+const status = document.getElementById('status');
+
+function add(n) {
+  if(number.value.length < 20) {
+    number.value += n;
+    status.textContent = 'INPUT RECEIVED...';
+  }
+}
+
+function removeLast() {
+  number.value = number.value.slice(0,-1);
+  status.textContent = 'DIGIT REMOVED';
+}
+
+function clearNumber() {
+  number.value = '';
+  status.textContent = 'SYSTEM CLEARED';
+}
+
+function call() {
+  if(!number.value) {
+    status.textContent = 'ERROR: NO NUMBER';
+    return;
+  }
+
+  status.textContent = 'SIMULATING CALL...';
+
+  setTimeout(() => {
+    status.textContent = 'CALL SIMULATION COMPLETE';
+  }, 2000);
+}
+</script>
+
+</body>
+</html>
